@@ -1,0 +1,23 @@
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(Single_Cycle.PipelineTester, org.scalatest.tools.Framework$$anon$1@38241f80, false, [SuiteSelector])[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mPipelineTester:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m- Pipeline Test *** FAILED ***[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  chisel3.internal.ChiselException: Connection between sink (Bool(IO in unelaborated Decode)) and source (Bool(IO io_dobranch in CU)) failed @: Sink is unwriteable by current module.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at ... ()[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at Single_Cycle.Decode.<init>(Decode.scala:60)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at Single_Cycle.TopCore_5stage.$anonfun$Decode$2(TopCore_5stage.scala:12)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at chisel3.Module$.do_apply(Module.scala:54)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at Single_Cycle.TopCore_5stage.$anonfun$Decode$1(TopCore_5stage.scala:12)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at chisel3.internal.plugin.package$.autoNameRecursively(package.scala:52)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at Single_Cycle.TopCore_5stage.<init>(TopCore_5stage.scala:12)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at Single_Cycle.PipelineTester.$anonfun$new$2(PipelineTester.scala:8)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at ... ()[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at ... (Stack trace trimmed to user code only. Rerun with --full-stacktrace to see the full stack trace)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  ...[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 996 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 1[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 1, aborted 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 0, failed 1, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m*** 1 TEST FAILED ***[0m[0m
+[0m[[0m[31merror[0m] [0m[0mFailed tests:[0m
+[0m[[0m[31merror[0m] [0m[0m	Single_Cycle.PipelineTester[0m
+[0m[[0m[31merror[0m] [0m[0m(Test / [31mtestOnly[0m) sbt.TestsFailedException: Tests unsuccessful[0m

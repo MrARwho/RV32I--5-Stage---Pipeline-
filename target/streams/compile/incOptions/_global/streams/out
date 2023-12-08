@@ -1,0 +1,46 @@
+[0m[[0m[0mdebug[0m] [0m[0mCreated transactional ClassFileManager with tempDir = /home/abdulrehman/Desktop/5_stage_pipeline/target/scala-2.12/classes.bak[0m
+[0m[[0m[0mdebug[0m] [0m[0mAbout to delete class files:[0m
+[0m[[0m[0mdebug[0m] [0m[0mWe backup class files:[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreated transactional ClassFileManager with tempDir = /home/abdulrehman/Desktop/5_stage_pipeline/target/scala-2.12/classes.bak[0m
+[0m[[0m[0mdebug[0m] [0m[0mAbout to delete class files:[0m
+[0m[[0m[0mdebug[0m] [0m[0mWe backup class files:[0m
+[0m[[0m[0mdebug[0m] [0m[0mRegistering generated classes:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	PC$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Decode.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	memory.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Execute.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	GCD.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Decode$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	DataPath.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	TopCore_5stage.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ALUOP.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ALUOP$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	TopCore_5stage$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	BranchALU.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	DecoupledGcd.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Wb.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Execute$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	InstMem$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	memory$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	CU$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Fetch.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Datamem$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	RegisterFile$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	GcdOutputBundle.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	BranchALU$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	GCD$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	CU.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	RegisterFile.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	GcdInputBundle.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Wb$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ALU1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Config.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Config.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Datamem.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Fetch$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ALUIO.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Core_5stage.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	DataPath$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	PC.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	InstMem.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mRemoving the temporary directory used for backing up class files: /home/abdulrehman/Desktop/5_stage_pipeline/target/scala-2.12/classes.bak[0m
