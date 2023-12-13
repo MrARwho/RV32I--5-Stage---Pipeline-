@@ -6,12 +6,14 @@ import chisel3 . util . _
 
 class TopCore_5stage extends Module {
   val io = IO(new Bundle {
-    val out = Output(UInt(32.W))
+    val executeout = Output(UInt(32.W))
+    val fetchout = Output(UInt(32.W))
+    val memout = Output(UInt(32.W))
   })
   val Fetch = Module(new Fetch)
   val Decode = Module(new Decode)
   val Execute = Module(new Execute)
-//  val Memory = Module(new memory)
+  val Memory = Module(new memory)
 //  val Wb = Module(new Wb)
 
 
@@ -28,6 +30,8 @@ class TopCore_5stage extends Module {
   Decode.io.datain:= 0.U
   Decode.io.RegWritein := 0.U
   Decode.io.dobranch:=0.U
+
+  io.fetchout:= ins
 
 
 
@@ -84,31 +88,51 @@ class TopCore_5stage extends Module {
   Execute.io.in_A := in_A
   Execute.io.in_B := in_B
 
-  io.out := Execute.io.out
+  io.executeout := Execute.io.out
+
+
+  //IE_MEM
+  val addr = Reg(UInt(32.W)) //main output of alu
+  addr:= Execute.io.out
+  Memory.io.addr:=addr
+  val pc3= Reg(UInt(32.W))
+  pc3:= Execute.io.pcout
+  Memory.io.pcin:=pc3
+  val Regwrite2 = Reg(Bool())
+  Regwrite2:= Execute.io.RegWriteout
+  Memory.io.regwritein:=Regwrite2
+
+  val memWen = Reg(Bool())
+  memWen := Execute.io.MemWriteout
+  Memory.io.Wen := memWen
 //
+  val wbselect2 = Reg(UInt(2.W))
+  wbselect2:= Execute.io.wbselectout
+  Memory.io.wbselectin := wbselect2
+
+  val datain = Reg(UInt(32.W))//IN_B transfer
+  datain := Execute.io.in_Bout //in_b_out_of alu
+  Memory.io.datain:=datain
+
+  val lengthselc = Reg(UInt(2.W))
+  lengthselc := Execute.io.lengthselectout
+  Memory.io.fun3 := lengthselc
+
+  val readmem2 =  Reg(Bool())
+  readmem2 := Execute.io.readmemout
+  Memory.io.readmem:= readmem2
+
+  val RDin = Reg(Bool())
+  RDin := Execute.io.RDout
+  Memory.io.RDin:=RDin
+
 //
-//  //IE_MEM
-//  val memWen = Reg(Bool())
-//  memWen := Execute.io.MemWriteout
-//  Memory.io.Wen := memWen
-//  val addr = Reg(UInt(32.W))
-//  addr:= Execute.io.out
-//  Memory.io.addr:=addr
-//  val datain = Reg(UInt(32.W))
-//  datain := Execute.io.in_Bout
-//  Memory.io.datain:=datain
-//  val wbselect2 = Reg(UInt(2.W))
-//  wbselect2:= Execute.io.wbselectout
-//  Memory.io.wbselectin := wbselect2
-//  val pc3= Reg(UInt(32.W))
-//  pc3:= Execute.io.pcout
-//  Memory.io.pcin:=pc3
-//  val Regwrite2 = Reg(Bool())
-//  Regwrite2:= Execute.io.RegWriteout
-//  Memory.io.regwritein:=Regwrite2
-//  val RDin = Reg(Bool())
-//  RDin := Execute.io.RDout
-//  Memory.io.RDin:=RDin
+  io.memout:= addr
+
+
+  //  val dobranch = Reg(Bool())
+  //  dobranch := Execute.io.doBranch
+  //  Memory.io.d
 //
 //  //MEM_WB
 //  val datamemout = Reg(UInt(32.W))

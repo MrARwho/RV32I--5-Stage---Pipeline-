@@ -11,8 +11,8 @@ class memory extends Module {
     val dmemdataout = Output(UInt(32.W))
     val aludataout = Output(UInt(32.W))
     val fun3 = Input(UInt(3.W)) //lengthselect
-    val enable = Input(Bool())
-    val instype = Input(UInt(2.W))
+    //val enable = Input(Bool())
+    //val instype = Input(UInt(2.W))
     val wbselectin = Input(UInt(2.W))
     val wbselectout = Output(UInt(2.W))
     val readmem = Input(Bool())
@@ -37,7 +37,7 @@ class memory extends Module {
   datamem.io.Wen := io.Wen
   datamem.io.addr := io.addr
   datamem.io.fun3 := io.fun3
-  datamem.io.enable := io.enable
+  datamem.io.enable := io.readmem
   io.dmemdataout:= datamem.io.dataout
   io.aludataout := io.addr
 
