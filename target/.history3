@@ -1,2 +1,5 @@
 1702047129359:exit
 1702047202344:testOnly Single_Cycle.PipelineTester
+1702455768106:testOnly Single_Cycle.PipelineTester DwriteVcd=1
+1702455860189:testOnly Single_Cycle.PipelineTester -DwriteVcd=1
+1702455902043:testOnly Single_Cycle.PipelineTester -- -DwriteVcd=1

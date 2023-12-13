@@ -14,11 +14,11 @@ class Execute extends Module with Config {
   val io = IO(new Bundle {
     val in_A = Input(UInt(WLEN.W))
     val in_B = Input(UInt(WLEN.W))
-    val alu_Op = Input(UInt(ALUOP_SIG_LEN.W))
+    //val alu_Op = Input(UInt(ALUOP_SIG_LEN.W))
     val out = Output(UInt(WLEN.W))
 //    val in_A = Input(UInt(32.W))
 //    val in_B = Input(UInt(32.W))
-    val fun3 = Input(UInt(4.W))
+    val fun3 = Input(UInt(4.W)) // btypefunc in
     val doBranch = Output(Bool())
     val isBtype = Input(Bool())
     val pcin = Input(UInt(32.W))
@@ -34,16 +34,17 @@ class Execute extends Module with Config {
     val MemWriteout = Output(Bool())
     val funcin = Input(UInt(5.W))
     val wbselectin = Input(UInt(2.W))
+    val wbselectout = Output(UInt(2.W))
     val aluselect = Input(Bool()) // 1 when S type to perform addition / else 0
-    val lengthselectin = Input(UInt(2.W))
+    val lengthselectin = Input(UInt(2.W)) //select store length
     val lengthselectout = Output(UInt(2.W))
 
     val pcselec = Input(Bool())
-    val btype = Input(Bool())
+    //val btype = Input(Bool())
     val jump = Input(Bool())
     val readmemin = Input(Bool())
     val readmemout = Output(Bool())
-    val wbselectout = Output(UInt(2.W))
+
     val RDin = Input(UInt(5.W))
     val RDout = Output(UInt(5.W))
     val in_Bout = Output(UInt(WLEN.W))
@@ -51,6 +52,15 @@ class Execute extends Module with Config {
 
 
   })
+  io.doBranch := false.B
+  io.pcout := 0.U
+  io.RegWriteout := false.B
+  io.MemWriteout := false.B
+  io.lengthselectout := 0.U
+  io.readmemout := false.B
+  io.wbselectout := 0.U
+  io.RDout := 0.U
+  io.in_Bout := 0.U
 
   io.in_Bout:= io.in_B
 
@@ -78,7 +88,7 @@ class Execute extends Module with Config {
   BALU.io.in_B := io.in_B
 
 
-  Alu.io.alu_Op := io.alu_Op
+  //Alu.io.alu_Op := io.alu_Op
   Alu.io.alu_Op := Mux(io.aluselect,0.U,io.funcin)
   BALU.io.fun3 := io.fun3
   io.out := Alu.io.out

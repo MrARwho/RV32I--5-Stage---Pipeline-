@@ -6,6 +6,7 @@ import chisel3 . util . _
 class Decode extends Module {
   val io = IO(new Bundle {
     val pcin = Input(UInt(32.W))
+    val pcout = Output(UInt(32.W))
     val ins = Input(UInt(32.W))
     val RD = Output(UInt(5.W))
 //    val Rs1 = Output(UInt(5.W))
@@ -17,16 +18,13 @@ class Decode extends Module {
     val func = Output(UInt(5.W))
     val wbselect = Output(UInt(2.W))
     val aluselect = Output(Bool()) // 1 when S type to perform addition / else 0
-    val lengthselect = Output(UInt(2.W))
+    val lengthselect = Output(UInt(2.W)) // store length
     val dobranch = Input(Bool())
     val btypefun = Output(UInt(4.W))
     val pcselec = Output(Bool())
     val btype = Output(Bool())
     val jump = Output(Bool())
     val readmem = Output(Bool())
-    val pcout = Output(UInt(32.W))
-
-
     //register file
     val RegWritein = Input(Bool())
     val RDin = Input(UInt(5.W))
@@ -38,6 +36,24 @@ class Decode extends Module {
 
 
   })
+  io.RD := 0.U
+  io.Imm := 0.U
+  io.Instype := false.B
+  io.RegWriteout := false.B
+  io.MemWrite := false.B
+  io.func := 0.U
+  io.wbselect := 0.U
+  io.aluselect := false.B
+  io.lengthselect := 0.U
+//  io.dobranch := false.B
+  io.btypefun := 0.U
+  io.pcselec := false.B
+  io.btype := false.B
+  io.jump := false.B
+  io.readmem := false.B
+  io.pcout := 0.U
+  io.Rs1out := 0.U
+  io.Rs2out := 0.U
 
   val cu = Module (new CU)
   val regfile = Module (new RegisterFile)
@@ -57,7 +73,7 @@ class Decode extends Module {
   io.wbselect :=cu.io.wbselect
   io.aluselect := cu.io.aluselect  // 1 when S type to perform addition / else 0
   io.lengthselect := cu.io.lengthselect
-  io.dobranch :=  cu.io.dobranch
+  cu.io.dobranch := io.dobranch
   io.btypefun := cu.io.btypefun
   io.pcselec := cu.io.pcselec
   io.btype := cu.io.btype

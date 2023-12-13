@@ -19,7 +19,9 @@ class Wb extends Module {
 
 
   })
-
+  io.dataOut := 0.U
+  io.Rdout := 0.U
+  io.Regwriteout := false.B
 
   when(io.wbselect === 1.U) {
     io.dataOut := io.Aludatain

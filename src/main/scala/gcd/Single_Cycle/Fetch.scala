@@ -12,7 +12,10 @@ class Fetch extends Module {
     val pcout4 = Output(UInt(32.W))
 
   })
-  val insmem2 = Module(new InstMem("C:/Users/Hamza's Son/Desktop/DSA SEM2 Java project/Scala-Chisel-Learning-Journey/src/main/scala/gcd/Single_Cycle/Imem.txt"))
+  io.ins := 0.U
+  io.pcout := 0.U
+  io.pcout4 := 0.U
+  val insmem2 = Module(new InstMem("/home/abdulrehman/Desktop/5_stage_pipeline/src/main/scala/gcd/Single_Cycle/Imem.txt"))
   val pc = RegInit(0.U(32.W))
   pc := Mux(io.pcselect, (io.aluout), pc + 4.U)
 
