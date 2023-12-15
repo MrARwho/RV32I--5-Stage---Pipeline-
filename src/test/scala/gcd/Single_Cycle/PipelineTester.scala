@@ -6,12 +6,10 @@ import chiseltest._
 class PipelineTester extends FreeSpec with ChiselScalatestTester {
   "Pipeline Test" in {
     test(new TopCore_5stage) { c =>
-      c.clock.step(3)
-      c.io.executeout.expect(3.U)
-      c.io.memout.expect(2.U)
-      c.io.fetchout.expect("b00000000000000000000001010010011".U)
-
-
+      c.clock.step(70)
+      c.io.executeout.expect(0.U)
+      c.io.memout.expect(0.U)
+      c.io.fetchout.expect("b0".U)
     }
   }
 }

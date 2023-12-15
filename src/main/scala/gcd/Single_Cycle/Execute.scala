@@ -40,6 +40,7 @@ class Execute extends Module with Config {
     val lengthselectout = Output(UInt(2.W))
 
     val pcselec = Input(Bool())
+    val pcselecout = Output(Bool())
     //val btype = Input(Bool())
     val jump = Input(Bool())
     val readmemin = Input(Bool())
@@ -59,9 +60,10 @@ class Execute extends Module with Config {
   io.lengthselectout := 0.U
   io.readmemout := false.B
   io.wbselectout := 0.U
-  io.RDout := 0.U
+  //io.RDout := 0.U
   io.in_Bout := 0.U
 
+  io.pcselecout := io.pcselec
   io.in_Bout:= io.in_B
 
   io.RDout:=io.RDin
@@ -72,6 +74,7 @@ class Execute extends Module with Config {
   io.lengthselectout := io.lengthselectin
   io.readmemout := io.readmemin
   io.pcout := io.pcin
+
 
 
 

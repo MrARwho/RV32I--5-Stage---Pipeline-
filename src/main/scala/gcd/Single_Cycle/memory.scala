@@ -22,6 +22,8 @@ class memory extends Module {
     val regwriteout = Output(Bool())
     val RDin = Input(UInt(5.W))
     val RDOut = Output(UInt(5.W))
+    val pcselecin = Input(Bool())
+    val pcselecout = Output(Bool())
 
 
 
@@ -32,6 +34,7 @@ class memory extends Module {
   io.pcout := io.pcin
   io.regwriteout:=io.regwritein
   io.RDOut:= io.RDin
+  io.pcselecout := io.pcselecin
 
   datamem.io.datain := io.datain
   datamem.io.Wen := io.Wen
@@ -47,11 +50,6 @@ class memory extends Module {
 
 
   //io.dataout := Mux(io.readmem,datamem.io.dataout,io.datain)
-
-
-
-
-
 
 }
 

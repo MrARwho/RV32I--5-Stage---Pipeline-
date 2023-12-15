@@ -9,12 +9,18 @@ class TopCore_5stage extends Module {
     val executeout = Output(UInt(32.W))
     val fetchout = Output(UInt(32.W))
     val memout = Output(UInt(32.W))
+    val wbout = Output(UInt(32.W))
   })
   val Fetch = Module(new Fetch)
   val Decode = Module(new Decode)
   val Execute = Module(new Execute)
   val Memory = Module(new memory)
-//  val Wb = Module(new Wb)
+  dontTouch(Memory.io)
+  dontTouch(Fetch.io)
+  dontTouch(Decode.io)
+
+
+  val Wb = Module(new Wb)
 
 
   //IF_ID pipeline
@@ -92,8 +98,11 @@ class TopCore_5stage extends Module {
 
 
   //IE_MEM
+  val pcselc3 = Reg(Bool())
+  pcselc3:= Execute.io.pcselecout
+  Memory.io.pcselecin := pcselc3
   val addr = Reg(UInt(32.W)) //main output of alu
-  addr:= Execute.io.out
+  addr := Execute.io.out
   Memory.io.addr:=addr
   val pc3= Reg(UInt(32.W))
   pc3:= Execute.io.pcout
@@ -101,7 +110,6 @@ class TopCore_5stage extends Module {
   val Regwrite2 = Reg(Bool())
   Regwrite2:= Execute.io.RegWriteout
   Memory.io.regwritein:=Regwrite2
-
   val memWen = Reg(Bool())
   memWen := Execute.io.MemWriteout
   Memory.io.Wen := memWen
@@ -122,7 +130,7 @@ class TopCore_5stage extends Module {
   readmem2 := Execute.io.readmemout
   Memory.io.readmem:= readmem2
 
-  val RDin = Reg(Bool())
+  val RDin = Reg(UInt(5.W))
   RDin := Execute.io.RDout
   Memory.io.RDin:=RDin
 
@@ -134,51 +142,44 @@ class TopCore_5stage extends Module {
   //  dobranch := Execute.io.doBranch
   //  Memory.io.d
 //
-//  //MEM_WB
-//  val datamemout = Reg(UInt(32.W))
-//  datamemout:= Memory.io.dmemdataout
-//  Wb.io.datamemin:=datamemout
-//
-//  val aludataout = Reg(UInt(32.W))
-//  aludataout:= Memory.io.aludataout
-//  Wb.io.Aludatain:=aludataout
-//
-//  val pcout4 = Reg(UInt(32.W))
-//  pcout4:= Memory.io.pcout
-//  Wb.io.pcin:=pcout4
-//
-//  val wbselect3 = Reg(Bool())
-//  wbselect3:= Memory.io.wbselectout
-//  Wb.io.wbselect := wbselect3
-//
-//  val Rd4 = Reg(UInt(5.W))
-//  Rd4 := Memory.io.RDOut
-//  Wb.io.Rd:= Rd4
-//
-//  val Regwrite3 = Reg(Bool())
-//  Regwrite3 := Memory.io.regwriteout
-//  Wb.io.Regwrite:= Regwrite3
+  //MEM_WB
+  val datamemout = Reg(UInt(32.W))
+  datamemout:= Memory.io.dmemdataout
+  Wb.io.datamemin:=datamemout
+
+  val aludataout = Reg(UInt(32.W))
+  aludataout:= Memory.io.aludataout
+  Wb.io.Aludatain:=aludataout
+
+  val pcout4 = Reg(UInt(32.W))
+  pcout4:= Memory.io.pcout
+  Wb.io.pcin:=pcout4
+
+  val wbselect3 = Reg(Bool())
+  wbselect3:= Memory.io.wbselectout
+  Wb.io.wbselect := wbselect3
+
+  val Rd4 = Reg(UInt(5.W))
+  Rd4 := Memory.io.RDOut
+  Wb.io.Rd:= Rd4
+
+  val Regwrite3 = Reg(Bool())
+  Regwrite3 := Memory.io.regwriteout
+  Wb.io.Regwrite:= Regwrite3
+
+
+  val pcselectin = Reg(Bool())
+  pcselectin := Memory.io.pcselecout
+  Wb.io.pcselecin := pcselectin
+
 //
 //  //Wb to Dec
-//  io.out := 0.U
+  Decode.io.RDin:= Wb.io.Rdout
+  Decode.io.datain := Wb.io.dataOut
+  Fetch.io.pcselect := Wb.io.pcselecout
+  Decode.io.RegWritein := Wb.io.Regwriteout
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  io.wbout := Wb.io.dataOut
 
 
 
