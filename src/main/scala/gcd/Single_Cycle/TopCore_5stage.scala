@@ -10,7 +10,9 @@ class TopCore_5stage extends Module {
     val fetchout = Output(UInt(32.W))
     val memout = Output(UInt(32.W))
     val wbout = Output(UInt(32.W))
+
   })
+  val ForwardUnit = Module(new Forward)
   val Fetch = Module(new Fetch)
   val Decode = Module(new Decode)
   val Execute = Module(new Execute)
@@ -18,9 +20,9 @@ class TopCore_5stage extends Module {
   dontTouch(Memory.io)
   dontTouch(Fetch.io)
   dontTouch(Decode.io)
-
-
   val Wb = Module(new Wb)
+
+  ForwardUnit.io.ID_EX_REGRS1 :=
 
 
   //IF_ID pipeline
@@ -39,9 +41,22 @@ class TopCore_5stage extends Module {
 
   io.fetchout:= ins
 
+// Forward module
+  val rs1sel = Reg(UInt(5.W))
+  rs1sel := Decode.io.Rs1sel
+  ForwardUnit.io.ID_EX_REGRS1 := rs1sel
+
+  val rs2sel = Reg(UInt(5.W))
+  rs2sel := Decode.io.Rs2sel
+  ForwardUnit.io.ID_EX_REGRS2 := rs2sel
+  ForwardUnit.io.MEM_WB_REGRD := Rd4
+  ForwardUnit.io.MEM_WB_REGWR := Regwrite3
+  ForwardUnit.io.EX_MEM_REGRD := RDin
+  ForwardUnit.io.EX_MEM_REGWR := Regwrite2
 
 
 //  //ID_IE pipeline
+
   val pc2 = Reg(UInt(32.W))
   pc2:= Decode.io.pcout
   Execute.io.pcin:=pc2

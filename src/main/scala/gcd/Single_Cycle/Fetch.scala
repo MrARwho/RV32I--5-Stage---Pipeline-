@@ -15,7 +15,9 @@ class Fetch extends Module {
   io.ins := 0.U
   io.pcout := 0.U
   io.pcout4 := 0.U
-  val insmem2 = Module(new InstMem("//home/abdulrehman/Desktop/5stage/RV32I--5-Stage---Pipeline-/src/main/scala/gcd/Single_Cycle/Imem.txt"))
+  // Windows : "C:\Users\Hamza's Son\Desktop\5 stage\RV32I--5-Stage---Pipeline-\src\main\scala\gcd\Single_Cycle\Imem.txt"
+  // Ubuntu : "//home/abdulrehman/Desktop/5stage/RV32I--5-Stage---Pipeline-/src/main/scala/gcd/Single_Cycle/Imem.txt"
+  val insmem2 = Module(new InstMem("C:\\Users\\Hamza's Son\\Desktop\\5 stage\\RV32I--5-Stage---Pipeline-\\src\\main\\scala\\gcd\\Single_Cycle\\Imem.txt"))
   val pc = RegInit(0.U(32.W))
   pc := Mux(io.pcselect, (io.aluout), pc + 4.U)
 

@@ -9,8 +9,8 @@ class Decode extends Module {
     val pcout = Output(UInt(32.W))
     val ins = Input(UInt(32.W))
     val RD = Output(UInt(5.W))
-//    val Rs1 = Output(UInt(5.W))
-//    val Rs2 = Output(UInt(5.W))
+    val Rs1sel = Output(UInt(5.W))
+    val Rs2sel = Output(UInt(5.W))
     val Imm = Output(UInt(32.W))
     val Instype = Output(Bool()) //Immidiate / Register select
     val RegWriteout = Output(Bool())
@@ -66,6 +66,9 @@ class Decode extends Module {
   regfile.io.Rs2in := cu.io.Rs2
   regfile.io.Rs1in := cu.io.Rs1
   regfile.io.Wen := io.RegWritein
+
+  io.Rs1sel := cu.io.Rs1
+  io.Rs2out := cu.io.Rs2
 
 
   io.MemWrite := cu.io.MemWrite
