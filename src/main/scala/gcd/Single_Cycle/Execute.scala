@@ -50,6 +50,13 @@ class Execute extends Module with Config {
     val RDout = Output(UInt(5.W))
     val in_Bout = Output(UInt(WLEN.W))
 
+    val fwd_a_sel = Input(UInt(2.W))
+    val fwd_b_sel = Input(UInt(2.W))
+
+    val exec_Din = Input(UInt(32.W))
+    val mem_wb_Din = Input(UInt(32.W))
+
+
 
 
   })
@@ -82,8 +89,17 @@ class Execute extends Module with Config {
   val Alu = Module(new ALU1)
   val BALU = Module(new BranchALU)
 
-  Alu.io.in_A := Mux(BALU.io.doBranch || io.jump, io.pcin, io.in_A)
-  Alu.io.in_B := Mux(!io.Instype, io.Imm, io.in_B)
+  io.in_A :=
+  io.in_B := MuxCase(io.in_B, Array(
+    (io.fwd_a_sel === 1.U) -> io.exec_Din,
+    (io.fwd_a_sel === 2.U) -> io.mem_wb_Din)))
+
+  Alu.io.in_A := Mux(BALU.io.doBranch || io.jump, io.pcin, MuxCase(io.in_A, Array(
+    (io.fwd_a_sel === 1.U) -> io.exec_Din,
+    (io.fwd_a_sel === 2.U) -> io.mem_wb_Din)))
+  Alu.io.in_B := Mux(!io.Instype, io.Imm, MuxCase(io.in_B, Array(
+    (io.fwd_b_sel === 1.U) -> io.exec_Din,
+    (io.fwd_b_sel === 2.U) -> io.mem_wb_Din)))
 
 //  Alu.io.in_A := io.in_A
 //  Alu.io.in_B := io.in_B

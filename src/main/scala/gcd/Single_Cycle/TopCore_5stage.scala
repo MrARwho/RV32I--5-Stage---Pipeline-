@@ -55,6 +55,7 @@ class TopCore_5stage extends Module {
   ForwardUnit.io.EX_MEM_REGWR := Regwrite2
 
 
+
 //  //ID_IE pipeline
 
   val pc2 = Reg(UInt(32.W))
@@ -117,7 +118,7 @@ class TopCore_5stage extends Module {
   pcselc3:= Execute.io.pcselecout
   Memory.io.pcselecin := pcselc3
   val addr = Reg(UInt(32.W)) //main output of alu
-  addr := Execute.io.out
+  addr := Execute.io.out // ins exec mn
   Memory.io.addr:=addr
   val pc3= Reg(UInt(32.W))
   pc3:= Execute.io.pcout
